@@ -10,3 +10,5 @@ This repository contains all the codes used to evaluate non-planar cavity geomet
 SImulating/visualising to check coupling into the cavity eigenmodes as a function of input polarization:
 1. Input S amplitude, P amplitude, dephasing variable                polarizationsim.py
 2. QWP angle variable             qwpsim.py
+
+- Text file with some geometric variables for the cavities:    commonplot.txt

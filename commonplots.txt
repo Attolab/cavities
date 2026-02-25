@@ -70,7 +70,7 @@ rho_p_2, rho_s_2 = 0.997283, 0.997452
 rho_p_1, rho_s_1 = 0.9990, 0.9995
 
 #known dephasings
-phi_p_2 = 0
+phi_p_2 = np.deg2rad(0)
 
 - plotting:
 (2*np.arctan(g_vars[0]))*180/np.pi+90, (2*np.arctan(g_vars[-1]))*180/np.pi+90

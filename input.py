@@ -44,7 +44,7 @@ mirror_types = [2,2,2,1,1,2,2,2,1,1]
 rho_p_2, rho_s_2 = 0.997283, 0.997452
 rho_p_1, rho_s_1 = 0.9990, 0.9995
 
-phi_p_2 = 0
+phi_p_2 = np.deg2rad(0)
 
 
 # -------------------- 6 MIRROR Manta ----------------------#
@@ -68,7 +68,7 @@ mirror_types = [1,1,1,1,1,1]
 rho_p_1, rho_s_1 = 0.9990, 0.9995
 
 #known dephasings
-phi_p_2 = 0
+phi_p_2 = np.deg2rad(0)
 
 
 

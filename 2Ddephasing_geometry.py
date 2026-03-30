@@ -78,13 +78,15 @@ def angle_of_incidence(i):
     nvec = normalize(-kin+kout)
     cos_theta = np.clip(np.abs(np.dot(kin,nvec)),-1,1)
     return np.degrees(np.arccos(cos_theta))
-
+    
 def rotation_matrix(i):
     _, svec_i, _ = local_basis(i)
     _, svec_next, _ = local_basis((i+1)%n_mirrors)
+    _, _, ppvec_i = local_basis(i)
+    pvec_next, _ ,_= local_basis((i + 1) % n_mirrors)
     cos_a = np.clip(np.dot(svec_i, svec_next), -1, 1)
     sin_a = np.sqrt(1 - cos_a**2)
-    return np.array([[cos_a, sin_a], [-sin_a, cos_a]])
+    return np.array([[np.dot(ppvec_i,pvec_next), np.dot(svec_i,pvec_next)], [ np.dot(ppvec_i, svec_next),np.dot(svec_i, svec_next) ]])
 
 def round_trip(delta=0, start=start_mirror - 1):
     J = np.identity(2, dtype=complex)

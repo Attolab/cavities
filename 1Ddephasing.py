@@ -54,8 +54,11 @@ def local_basis(i):
 def rotation_angle(i):
     _, svec_i, _ = local_basis(i)
     _, svec_next, _ = local_basis((i+1)%n_mirrors)
-    cos_a = np.clip(np.dot(svec_i,svec_next),-1,1)
-    return np.degrees(np.arccos(cos_a))
+    k = normalize(np.array(coords[i]) - np.array(coords[i-1]))
+    cross = np.cross(svec_i, svec_next)
+    sin_a = np.dot(cross, k)   # ze signed part
+    cos_a = np.dot(svec_i, svec_next)
+    return np.degrees(np.arctan2(sin_a, cos_a))
 
 def angle_of_incidence(i):
     kin = normalize(np.array(coords[i])-np.array(coords[i-1]))

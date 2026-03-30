@@ -28,7 +28,7 @@ n_g = 100
 g_vars = np.linspace(np.deg2rad(g_var_min), np.deg2rad(g_var_max), n_g)
 coords = get_coords(g_vars[0])
 
-start_mirror = 2   # the starting mirror aka the section you want access to
+start_mirror = 2   # the starting mirror aka the section you want access to... convention: between Mn and Mn+1, the starting mirror is Mn+1, n starts with 0
 n_mirrors = len(coords)
 
 # mirror types: 1=mirrors with delta dephasing to be varied, 2,3,4=other mirrors with known dephasings
@@ -86,13 +86,15 @@ def rotation_matrix(i):
     sin_a = np.sqrt(1 - cos_a**2)
     return np.array([[cos_a, sin_a], [-sin_a, cos_a]])
 
-def round_trip(delta=0, start=start_mirror - 1):
+#convention for Round TRip... if we want to see the modes between M1 & M2, we start with R1,2 -> M2
+def round_trip(delta=0, start=start_mirror):
     J = np.identity(2, dtype=complex)
     for j in range(n_mirrors):
         i = (start + j) % n_mirrors
-        R = rotation_matrix(i)
+        k = (start + j-1) % n_mirrors
+        R = rotation_matrix(k)
         M = reflection_matrix(i, delta)
-        J = R @ M @ J
+        J = M @ R @ J
     return J
 
 def circularity(delta):
